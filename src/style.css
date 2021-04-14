@@ -5,3 +5,11 @@ form {
   width: 600px;
   flex-direction: column;
 }
+.listPosts {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.listPosts p {
+  margin: 3px 0;
+}

@@ -5,6 +5,7 @@ import firebase from "./firebaseConnection";
 function App() {
   const [titulo, setTitulo] = useState("");
   const [autor, setAutor] = useState("");
+  const [posts, setPosts] = useState([]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -37,18 +38,37 @@ function App() {
       });
   }
   async function buscaPost() {
+    // busca post pelo id 123
+    // await firebase
+    //   .firestore()
+    //   .collection("posts")
+    //   .doc("123")
+    //   .get()
+    //   .then((snapShot) => {
+    //     setAutor(snapShot.data().autor);
+    //     setTitulo(snapShot.data().titulo);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error, "algum erro ocorreu");
+    //   });
+
     await firebase
       .firestore()
       .collection("posts")
-      .doc("123")
       .get()
       .then((snapShot) => {
-        setAutor(snapShot.data().autor);
-        setTitulo(snapShot.data().titulo);
+        const listPosts = [];
+        snapShot.forEach((item) => {
+          listPosts.push({
+            id: item.id,
+            titulo: item.data().titulo,
+            autor: item.data().autor,
+          });
+        });
+        setPosts(listPosts);
+        console.log(listPosts);
       })
-      .catch((error) => {
-        console.log(error, "algum erro ocorreu");
-      });
+      .catch((error) => console.log(error));
   }
 
   return (
@@ -77,8 +97,17 @@ function App() {
         />
         <button type="submit"> Cadastrar</button>
       </form>
-
-      <button onClick={() => buscaPost()}>Buscar post 123</button>
+      <button onClick={() => buscaPost()}>Buscar lista de posts</button> <br />
+      <ol className="listPosts">
+        {posts.map((item) => {
+          return (
+            <li key={item.id}>
+              <p>titulo:{item.titulo}</p>
+              <p>autor: {item.autor}</p>
+            </li>
+          );
+        })}
+      </ol>
     </div>
   );
 }
