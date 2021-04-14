@@ -11,8 +11,6 @@ let firebaseConfig = {
   measurementId: "G-L6VNKFHS8S",
 };
 // Initialize Firebase
-if (!firebase.app.length) {
-  firebase.initializeApp(firebaseConfig);
-}
+firebase.initializeApp(firebaseConfig);
 
 export default firebase;
