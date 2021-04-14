@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import firebase from "./firebaseConnection";
 
@@ -6,6 +6,27 @@ function App() {
   const [titulo, setTitulo] = useState("");
   const [autor, setAutor] = useState("");
   const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    async function loadPosts() {
+      // o método onSnapshot vai fazer com que fique se atualizando em real time
+      await firebase
+        .firestore()
+        .collection("posts")
+        .onSnapshot((doc) => {
+          const listPosts = [];
+
+          doc.forEach((item) => {
+            listPosts.push({
+              id: item.id,
+              titulo: item.data().titulo,
+              autor: item.data().autor,
+            });
+          });
+          setPosts(listPosts);
+        });
+    }
+    loadPosts();
+  }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -37,7 +58,8 @@ function App() {
         console.log(error, "algum erro ocorreu");
       });
   }
-  async function buscaPost() {
+
+  async function buscaPosts() {
     // busca post pelo id 123
     // await firebase
     //   .firestore()
@@ -66,7 +88,6 @@ function App() {
           });
         });
         setPosts(listPosts);
-        console.log(listPosts);
       })
       .catch((error) => console.log(error));
   }
@@ -97,7 +118,7 @@ function App() {
         />
         <button type="submit"> Cadastrar</button>
       </form>
-      <button onClick={() => buscaPost()}>Buscar lista de posts</button> <br />
+      <button onClick={() => buscaPosts()}>Buscar lista de posts</button> <br />
       <ol className="listPosts">
         {posts.map((item) => {
           return (
