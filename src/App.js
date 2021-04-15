@@ -6,6 +6,8 @@ function App() {
   const [titulo, setTitulo] = useState("");
   const [autor, setAutor] = useState("");
   const [posts, setPosts] = useState([]);
+  const [idPost, setIdPost] = useState("");
+
   useEffect(() => {
     async function loadPosts() {
       // o método onSnapshot vai fazer com que fique se atualizando em real time
@@ -91,7 +93,22 @@ function App() {
       })
       .catch((error) => console.log(error));
   }
-
+  async function editPost() {
+    await firebase
+      .firestore()
+      .collection("posts")
+      .doc(idPost)
+      .update({ titulo: titulo, autor: autor })
+      .then(() => {
+        alert("dados atualizados");
+        setAutor("");
+        setTitulo("");
+        setIdPost("");
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }
   return (
     <div className="App">
       <h1>React js + firebase:)</h1>
@@ -119,10 +136,19 @@ function App() {
         <button type="submit"> Cadastrar</button>
       </form>
       <button onClick={() => buscaPosts()}>Buscar lista de posts</button> <br />
+      <label htmlFor="">ID</label>
+      <input
+        type="text"
+        value={idPost}
+        onChange={(e) => setIdPost(e.target.value)}
+      />
+      <br />
+      <button onClick={editPost}>Editar Post pelo ID</button> <br />
       <ol className="listPosts">
         {posts.map((item) => {
           return (
             <li key={item.id}>
+              <span>id: {item.id}</span>
               <p>titulo:{item.titulo}</p>
               <p>autor: {item.autor}</p>
             </li>
