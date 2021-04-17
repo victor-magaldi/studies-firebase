@@ -109,6 +109,18 @@ function App() {
         alert(error);
       });
   }
+
+  async function excluirPost(id) {
+    await firebase
+      .firestore()
+      .collection("posts")
+      .doc(`${id}`)
+      .delete()
+      .then(() => {
+        alert("post excluído");
+      })
+      .catch((error) => console.log(error));
+  }
   return (
     <div className="App">
       <h1>React js + firebase:)</h1>
@@ -145,12 +157,19 @@ function App() {
       <br />
       <button onClick={editPost}>Editar Post pelo ID</button> <br />
       <ol className="listPosts">
-        {posts.map((item) => {
+        {posts.map((post) => {
           return (
-            <li key={item.id}>
-              <span>id: {item.id}</span>
-              <p>titulo:{item.titulo}</p>
-              <p>autor: {item.autor}</p>
+            <li key={post.id}>
+              <span>id: {post.id}</span>
+              <p>titulo:{post.titulo}</p>
+              <p>autor: {post.autor}</p>
+              <button
+                onClick={() => {
+                  excluirPost(post.id);
+                }}
+              >
+                Excluir Post
+              </button>
             </li>
           );
         })}
