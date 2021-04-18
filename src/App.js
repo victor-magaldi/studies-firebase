@@ -8,6 +8,9 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [idPost, setIdPost] = useState("");
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   useEffect(() => {
     async function loadPosts() {
       // o método onSnapshot vai fazer com que fique se atualizando em real time
@@ -121,10 +124,49 @@ function App() {
       })
       .catch((error) => console.log(error));
   }
+  async function novoUsuario() {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((value) => {
+        console.log(value);
+        alert("novo usuário cadastrado com sucesso");
+      })
+      .catch((error) => {
+        if (error.code === "auth/weak-password") {
+          alert("senha muito fraca");
+        } else if (error.code === "auth/email-already-in-use") {
+          alert("Email já existe");
+        }
+      });
+  }
   return (
     <div className="App">
       <h1>React js + firebase:)</h1>
+      <h2>Registrar usuário</h2>
+      <div>
+        <label htmlFor="email"> E-mail</label>
+        <input
+          type="text"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
+
+        <label htmlFor="password"> Senha</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
+        <button onClick={novoUsuario}>Cadastrar</button>
+      </div>
       <br />
+      <hr />
+      <h2>Banco de Dados </h2>
       <form onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor="">Titulo</label>
         <textarea
@@ -156,6 +198,7 @@ function App() {
       />
       <br />
       <button onClick={editPost}>Editar Post pelo ID</button> <br />
+      <hr />
       <ol className="listPosts">
         {posts.map((post) => {
           return (
