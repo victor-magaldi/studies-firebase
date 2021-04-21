@@ -11,6 +11,9 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [user, setUser] = useState(false);
+  const [userLogged, setUserLogged] = useState({});
+
   useEffect(() => {
     async function loadPosts() {
       // o método onSnapshot vai fazer com que fique se atualizando em real time
@@ -31,6 +34,27 @@ function App() {
         });
     }
     loadPosts();
+  }, []);
+
+  useEffect(() => {
+    async function checkLogin() {
+      //essa funçao fica escutando para ver se existe alguem logado
+      await firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          setUser(true);
+          setUserLogged({
+            uid: user.uid,
+            email: user.email,
+          });
+          // existe user logado
+        } else {
+          //não existe user logado
+          setUser(false);
+          setUserLogged({});
+        }
+      });
+    }
+    checkLogin();
   }, []);
 
   async function handleSubmit(e) {
@@ -133,6 +157,7 @@ function App() {
         alert("novo usuário cadastrado com sucesso");
       })
       .catch((error) => {
+        console.log(error);
         if (error.code === "auth/weak-password") {
           alert("senha muito fraca");
         } else if (error.code === "auth/email-already-in-use") {
@@ -140,9 +165,33 @@ function App() {
         }
       });
   }
+  async function logout() {
+    await firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        alert("logout feito");
+      });
+  }
+
+  async function login() {
+    await firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((value) => {
+        console.log(value);
+        setUser(true);
+        alert("login feito");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
     <div className="App">
       <h1>React js + firebase:)</h1>
+      {user && <div>você está logado com {userLogged.email}</div>}
       <h2>Registrar usuário</h2>
       <div>
         <label htmlFor="email"> E-mail</label>
@@ -163,6 +212,9 @@ function App() {
           }}
         />
         <button onClick={novoUsuario}>Cadastrar</button>
+        <button onClick={login}>Fazer Login</button>
+
+        <button onClick={logout}>Sair da Conta</button>
       </div>
       <br />
       <hr />
