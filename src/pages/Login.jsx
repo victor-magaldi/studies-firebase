@@ -9,21 +9,25 @@ export function Login() {
       <Row>
         <Col>
           <Tabs
-            defaultActiveKey="profile"
-            id="uncontrolled-tab-example"
+            onSelect={(evt) => {
+              console.log("evt", evt);
+            }}
+            defaultActiveKey="Login"
+            id="tabslogin"
             className="mb-3"
           >
             <Tab
+              ini
               tabClassName={style?.loginTabBtn}
-              eventKey="Login"
-              title="Login"
+              eventKey="login"
+              title="login"
             >
               <h1>Login</h1>
             </Tab>
             <Tab
               tabClassName={style?.RegisterTabBtn}
-              eventKey="Cadastrar"
-              title="Cadastrar"
+              eventKey="cadastrar"
+              title="cadastrar"
             >
               <h1>Cadastrar</h1>
             </Tab>
