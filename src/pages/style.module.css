@@ -1,0 +1,7 @@
+.containerLogin .loginTabBtn {
+    border: solid red 2px;
+}
+
+.containerLogin .RegisterTabBtn {
+    border: solid green;
+}

@@ -1,9 +1,11 @@
 import React from "react";
 import { Col, Container, Row, Tabs, Tab } from "react-bootstrap";
 
+import style from "./style.module.css";
+
 export function Login() {
   return (
-    <Container>
+    <Container className={style.containerLogin}>
       <Row>
         <Col>
           <Tabs
@@ -11,10 +13,18 @@ export function Login() {
             id="uncontrolled-tab-example"
             className="mb-3"
           >
-            <Tab eventKey="Login" title="Login">
+            <Tab
+              tabClassName={style?.loginTabBtn}
+              eventKey="Login"
+              title="Login"
+            >
               <h1>Login</h1>
             </Tab>
-            <Tab eventKey="Cadastrar" title="Cadastrar">
+            <Tab
+              tabClassName={style?.RegisterTabBtn}
+              eventKey="Cadastrar"
+              title="Cadastrar"
+            >
               <h1>Cadastrar</h1>
             </Tab>
           </Tabs>
