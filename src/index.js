@@ -4,7 +4,6 @@ import ThemeProvider from "react-bootstrap/ThemeProvider";
 
 // import App2 from "./App-copy";
 import App from "./App";
-import { Login } from "./pages/Login";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,7 +12,6 @@ ReactDOM.render(
     >
       <App />;{/* app 2 Auth banco de dados  */}
       {/* <App2 /> */}
-      <Login />
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
