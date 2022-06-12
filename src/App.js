@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import firebase from "./services/firebaseConnection";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [titulo, setTitulo] = useState("");
