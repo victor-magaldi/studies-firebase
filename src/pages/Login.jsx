@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Container, Row, Tabs, Tab } from "react-bootstrap";
+import { FormLogin } from "../components/FormLogin";
 
 import style from "./style.module.css";
 
@@ -22,7 +23,7 @@ export function Login() {
               eventKey="login"
               title="login"
             >
-              <h1>Login</h1>
+              <FormLogin />
             </Tab>
             <Tab
               tabClassName={style?.RegisterTabBtn}
