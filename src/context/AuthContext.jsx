@@ -41,7 +41,7 @@ export default function AuthProvider({ children }) {
           email: value.user.email,
         };
         setUser(data);
-        localStoraUser(data);
+        localStorageUser(data);
         setLoadingAuth(false);
       })
       .catch((error) => {
@@ -77,7 +77,7 @@ export default function AuthProvider({ children }) {
               avatarUrl: null,
             };
             setUser(data);
-            localStoraUser(data);
+            localStorageUser(data);
             setLoadingAuth(false);
           });
       })
@@ -87,7 +87,7 @@ export default function AuthProvider({ children }) {
       });
   }
 
-  function localStoraUser(dataUser) {
+  function localStorageUser(dataUser) {
     localStorage.setItem("sistemaUser", JSON.stringify(dataUser));
   }
 
@@ -112,7 +112,7 @@ export default function AuthProvider({ children }) {
         signUp,
         signOut,
         setUser,
-        localStoraUser,
+        localStorageUser,
       }}
     >
       {children}
