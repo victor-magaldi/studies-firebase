@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import "./style.css";
 import firebase from "./services/firebaseConnection";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -192,6 +194,13 @@ function App() {
 
   return (
     <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/opa" element={<>opa</>} />
+          <Route path="/teste" element={<>teste</>} />
+          <Route path="/" element={<>index</>} />
+        </Routes>
+      </BrowserRouter>
       <h1>React js + firebase:)</h1>
       {user && <div>você está logado com {userLogged.email}</div>}
       <h2>Registrar usuário</h2>
