@@ -209,6 +209,7 @@ function App() {
         <input
           type="text"
           value={email}
+          placeholder="email"
           onChange={(e) => {
             setEmail(e.target.value);
           }}
@@ -217,6 +218,7 @@ function App() {
         <label htmlFor="password"> Senha</label>
         <input
           type="password"
+          placeholder="senha"
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
