@@ -11,7 +11,7 @@ export function Login() {
         <Col sm={12} md={8}>
           sm=12 md=8
         </Col>
-        <Col sm={12} md={4}>
+        <Col sm={12} className="d-none d-md-block" md={4}>
           sm=12 md=4
         </Col>
       </Row>
