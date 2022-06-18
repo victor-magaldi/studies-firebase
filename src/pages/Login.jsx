@@ -8,6 +8,14 @@ export function Login() {
   return (
     <Container className={style.containerLogin}>
       <Row>
+        <Col sm={12} md={8}>
+          sm=12 md=8
+        </Col>
+        <Col sm={12} md={4}>
+          sm=12 md=4
+        </Col>
+      </Row>
+      <Row sm={6} md={12} xs={12}>
         <Col>
           <Tabs
             onSelect={(evt) => {
