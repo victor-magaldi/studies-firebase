@@ -5,6 +5,7 @@ import "./style.css";
 import firebase from "./services/firebaseConnection";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Login } from "./pages/Login";
+import { NavMenu } from "./components/Navbar";
 
 function App() {
   const [titulo, setTitulo] = useState("");
@@ -195,6 +196,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <NavMenu/>
         <Routes>
           <Route path="/opa" element={<>opa</>} />
           <Route path="/teste" element={<>teste</>} />
@@ -218,7 +220,7 @@ function App() {
         <label htmlFor="password"> Senha</label>
         <input
           type="password"
-          placeholder="senha"
+          placeholder="senhaya"
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
