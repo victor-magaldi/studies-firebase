@@ -6,6 +6,7 @@ import firebase from "./services/firebaseConnection";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Access } from "./pages/Access";
 import { NavMenu } from "./components/Navbar";
+import AuthProvider from "./context/AuthContext";
 
 function App() {
   const [titulo, setTitulo] = useState("");
@@ -194,97 +195,100 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <BrowserRouter>
-        <NavMenu />
-        <Routes>
-          <Route path="/access" element={<Access />} />
-          <Route path="/firestore" element={<>firestore page</>} />
-          <Route path="*" element={<>404</>} />
-        </Routes>
-      </BrowserRouter>
-      <h1>React js + firebase:)</h1>
-      {user && <div>você está logado com {userLogged.email}</div>}
-      <h2>Registrar usuário</h2>
-      <div>
-        <label htmlFor="email"> E-mail</label>
+    <AuthProvider>
+      <div className="App">
+        <BrowserRouter>
+          <NavMenu />
+          <Routes>
+            <Route path="/access" element={<Access />} />
+            <Route path="/firestore" element={<>firestore page</>} />
+            <Route path="*" element={<>404</>} />
+          </Routes>
+        </BrowserRouter>
+        <h1>React js + firebase:)</h1>
+        {user && <div>você está logado com {userLogged.email}</div>}
+        <h2>Registrar usuário</h2>
+        <div>
+          <label htmlFor="email"> E-mail</label>
+          <input
+            type="text"
+            value={email}
+            placeholder="email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+
+          <label htmlFor="password"> Senha</label>
+          <input
+            type="password"
+            placeholder="senhaya"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <button onClick={novoUsuario}>Cadastrar</button>
+          <button onClick={login}>Fazer Login</button>
+
+          <button onClick={logout}>Sair da Conta</button>
+        </div>
+        <br />
+        <hr />
+        <h2>Banco de Dados </h2>
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <label htmlFor="">Titulo</label>
+          <textarea
+            name="teste"
+            value={titulo}
+            onChange={(e) => {
+              setTitulo(e.target.value);
+            }}
+          ></textarea>
+
+          <label htmlFor="autor">Autor</label>
+          <input
+            type="text"
+            name=""
+            value={autor}
+            id=""
+            onChange={(e) => {
+              setAutor(e.target.value);
+            }}
+          />
+          <button type="submit"> Cadastrar</button>
+        </form>
+        <button onClick={() => buscaPosts()}>Buscar lista de posts</button>{" "}
+        <br />
+        <label htmlFor="">ID</label>
         <input
           type="text"
-          value={email}
-          placeholder="email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
+          value={idPost}
+          onChange={(e) => setIdPost(e.target.value)}
         />
-
-        <label htmlFor="password"> Senha</label>
-        <input
-          type="password"
-          placeholder="senhaya"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-        <button onClick={novoUsuario}>Cadastrar</button>
-        <button onClick={login}>Fazer Login</button>
-
-        <button onClick={logout}>Sair da Conta</button>
+        <br />
+        <button onClick={editPost}>Editar Post pelo ID</button> <br />
+        <hr />
+        <ol className="listPosts">
+          {posts.map((post) => {
+            return (
+              <li key={post.id}>
+                <span>id: {post.id}</span>
+                <p>titulo:{post.titulo}</p>
+                <p>autor: {post.autor}</p>
+                <button
+                  onClick={() => {
+                    excluirPost(post.id);
+                  }}
+                >
+                  Excluir Post
+                </button>
+              </li>
+            );
+          })}
+        </ol>
       </div>
-      <br />
-      <hr />
-      <h2>Banco de Dados </h2>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <label htmlFor="">Titulo</label>
-        <textarea
-          name="teste"
-          value={titulo}
-          onChange={(e) => {
-            setTitulo(e.target.value);
-          }}
-        ></textarea>
-
-        <label htmlFor="autor">Autor</label>
-        <input
-          type="text"
-          name=""
-          value={autor}
-          id=""
-          onChange={(e) => {
-            setAutor(e.target.value);
-          }}
-        />
-        <button type="submit"> Cadastrar</button>
-      </form>
-      <button onClick={() => buscaPosts()}>Buscar lista de posts</button> <br />
-      <label htmlFor="">ID</label>
-      <input
-        type="text"
-        value={idPost}
-        onChange={(e) => setIdPost(e.target.value)}
-      />
-      <br />
-      <button onClick={editPost}>Editar Post pelo ID</button> <br />
-      <hr />
-      <ol className="listPosts">
-        {posts.map((post) => {
-          return (
-            <li key={post.id}>
-              <span>id: {post.id}</span>
-              <p>titulo:{post.titulo}</p>
-              <p>autor: {post.autor}</p>
-              <button
-                onClick={() => {
-                  excluirPost(post.id);
-                }}
-              >
-                Excluir Post
-              </button>
-            </li>
-          );
-        })}
-      </ol>
-    </div>
+    </AuthProvider>
   );
 }
 
