@@ -1,6 +1,8 @@
 import React from "react";
 import { Col, Container, Row, Tabs, Tab } from "react-bootstrap";
 import { FormLogin } from "../components/FormLogin";
+import { RegisterUser } from "../components/RegisterUser";
+
 
 import style from "./style.module.css";
 
@@ -15,7 +17,7 @@ export function Login() {
           sm=12 md=4
         </Col>
       </Row>
-      <Row >
+      <Row>
         <Col>
           <Tabs
             onSelect={(evt) => {
@@ -38,7 +40,7 @@ export function Login() {
               eventKey="cadastrar"
               title="cadastrar"
             >
-              <h1>Cadastrar</h1>
+              <RegisterUser />
             </Tab>
           </Tabs>
         </Col>

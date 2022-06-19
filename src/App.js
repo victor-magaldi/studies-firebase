@@ -199,8 +199,8 @@ function App() {
         <NavMenu />
         <Routes>
           <Route path="/access" element={<Login />} />
-          <Route path="/teste" element={<>teste</>} />
-          <Route path="/" element={<>index</>} />
+          <Route path="/firestore" element={<>firestore page</>} />
+          <Route path="*" element={<>404</>} />
         </Routes>
       </BrowserRouter>
       <h1>React js + firebase:)</h1>
