@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./style.css";
 import firebase from "./services/firebaseConnection";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Login } from "./pages/Login";
+import { Access } from "./pages/Access";
 import { NavMenu } from "./components/Navbar";
 
 function App() {
@@ -198,7 +198,7 @@ function App() {
       <BrowserRouter>
         <NavMenu />
         <Routes>
-          <Route path="/access" element={<Login />} />
+          <Route path="/access" element={<Access />} />
           <Route path="/firestore" element={<>firestore page</>} />
           <Route path="*" element={<>404</>} />
         </Routes>

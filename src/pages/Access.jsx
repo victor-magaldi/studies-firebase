@@ -6,7 +6,7 @@ import { RegisterUser } from "../components/RegisterUser";
 
 import style from "./style.module.css";
 
-export function Login() {
+export function Access() {
   return (
     <Container className={style.containerLogin}>
       <Row>
