@@ -15,7 +15,7 @@ export function Login() {
           sm=12 md=4
         </Col>
       </Row>
-      <Row sm={6} md={12} xs={12}>
+      <Row >
         <Col>
           <Tabs
             onSelect={(evt) => {

@@ -196,9 +196,9 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <NavMenu/>
+        <NavMenu />
         <Routes>
-          <Route path="/opa" element={<>opa</>} />
+          <Route path="/access" element={<Login />} />
           <Route path="/teste" element={<>teste</>} />
           <Route path="/" element={<>index</>} />
         </Routes>
@@ -284,7 +284,6 @@ function App() {
           );
         })}
       </ol>
-      <Login />
     </div>
   );
 }
