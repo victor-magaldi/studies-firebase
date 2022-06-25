@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./style.css";
-import firebase from "./services/firebaseConnection";
+import {firebase} from "./services/firebaseConnection";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Access } from "./pages/Access";
 import { NavMenu } from "./components/Navbar";
