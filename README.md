@@ -1,3 +1,3 @@
-## repositório para estudo firebase
+## Estudo FIREBASE
 
 Projeto feito para estudar firebase
