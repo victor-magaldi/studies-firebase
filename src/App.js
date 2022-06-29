@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Access } from "./pages/Access";
 import { NavMenu } from "./components/Navbar";
 import AuthProvider from "./context/AuthContext";
+import { Firestore } from "./pages/Firestore";
 
 function App() {
   const [titulo, setTitulo] = useState("");
@@ -201,7 +202,7 @@ function App() {
           <NavMenu />
           <Routes>
             <Route path="/access" element={<Access />} />
-            <Route path="/firestore" element={<>firestore page</>} />
+            <Route path="/firestore" element={<Firestore/>} />
             <Route path="*" element={<>404</>} />
           </Routes>
         </BrowserRouter>
