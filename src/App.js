@@ -222,7 +222,7 @@ function App() {
           <label htmlFor="password"> Senha</label>
           <input
             type="password"
-            placeholder="senhaya"
+            placeholder="senha"
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
