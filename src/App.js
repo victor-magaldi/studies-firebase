@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./style.css";
-import {firebase} from "./services/firebaseConnection";
+import { firebase } from "./services/firebaseConnection";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Access } from "./pages/Access";
 import { NavMenu } from "./components/Navbar";
@@ -202,14 +202,14 @@ function App() {
           <NavMenu />
           <Routes>
             <Route path="/access" element={<Access />} />
-            <Route path="/firestore" element={<Firestore/>} />
+            <Route path="/firestore" element={<Firestore />} />
             <Route path="*" element={<>404</>} />
           </Routes>
         </BrowserRouter>
         <h1>React js + firebase:)</h1>
         {user && <div>você está logado com {userLogged.email}</div>}
         <h2>Registrar usuário</h2>
-        <div>
+        <div className="d-flex flex-column auto">
           <label htmlFor="email"> E-mail</label>
           <input
             type="text"

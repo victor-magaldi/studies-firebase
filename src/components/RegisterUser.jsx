@@ -1,22 +1,22 @@
-import React from 'react'
-import { useState } from 'react';
-import { useAuth } from '../hook/useAuth'
+import React from "react";
+import { useState } from "react";
+import { useAuth } from "../hook/useAuth";
 
 export function RegisterUser() {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const { signUp } = useAuth();
-    console.log("signUp", signUp);
+  const { signUp } = useAuth();
+  console.log("signUp", signUp);
 
-    const handleSubmit = (evt)=>{
-        evt.preventDefault()
-        console.log(evt,name,email,password)
-    }
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    console.log(evt, name, email, password);
+  };
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className="d-flex flex-col" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="name"
